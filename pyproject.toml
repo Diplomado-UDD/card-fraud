@@ -43,6 +43,8 @@ disallow_untyped_defs = false
 
 [dependency-groups]
 dev = [
+    "mypy>=1.18.2",
     "pytest>=9.0.0",
     "pytest-cov>=7.0.0",
+    "ruff>=0.14.4",
 ]
