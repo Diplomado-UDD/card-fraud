@@ -144,7 +144,7 @@ def run_batch_inference(
     
     stats = service.predict_from_csv(input_csv, output_csv, threshold)
     
-    print(f"\nBatch Inference Complete:")
+    print("\nBatch Inference Complete:")
     print(f"  Transactions:   {stats['total_transactions']:,}")
     print(f"  Fraud Detected: {stats['fraud_detected']:,} ({100*stats['fraud_rate']:.2f}%)")
     print(f"  Inference Time: {stats['inference_time_sec']:.2f}s")

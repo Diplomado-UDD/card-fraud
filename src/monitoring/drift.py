@@ -2,7 +2,7 @@
 
 import numpy as np
 import pandas as pd
-from typing import Dict, Tuple
+from typing import Dict
 import json
 from pathlib import Path
 

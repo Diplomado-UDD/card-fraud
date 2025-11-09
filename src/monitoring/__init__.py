@@ -2,7 +2,6 @@
 
 from prometheus_client import Counter, Histogram, Gauge, Info, start_http_server
 import time
-from typing import Optional
 import numpy as np
 
 

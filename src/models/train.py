@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     f1_score, precision_score, recall_score, roc_auc_score,
-    precision_recall_curve, auc, confusion_matrix, classification_report
+    precision_recall_curve, auc, confusion_matrix
 )
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
@@ -255,6 +255,6 @@ def print_metrics(metrics: Dict[str, float], name: str = "Model") -> None:
     print(f"  ROC-AUC:     {metrics['roc_auc']:.4f}")
     
     if 'true_positives' in metrics:
-        print(f"\n  Confusion Matrix:")
+        print("\n  Confusion Matrix:")
         print(f"    TP: {metrics['true_positives']:5d}  FP: {metrics['false_positives']:5d}")
         print(f"    FN: {metrics['false_negatives']:5d}  TN: {metrics['true_negatives']:5d}")
