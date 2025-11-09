@@ -1,0 +1,55 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data files (large datasets)
+data/*.csv
+data/*.parquet
+data/*.feather
+!data/.gitkeep
+
+# Model artifacts
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.onnx
+!models/.gitkeep
+
+# Experiment tracking
+mlruns/
+.mlflow/
+
+# Jupyter/Marimo checkpoints
+.ipynb_checkpoints/
+*.marimo.bak
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files with secrets
+.env
+.env.local
+
+# Docker
+.dockerignore
+
+# Monitoring
+monitoring/data/
