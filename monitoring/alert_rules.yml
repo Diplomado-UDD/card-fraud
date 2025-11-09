@@ -1,0 +1,113 @@
+groups:
+  - name: fraud_detection_alerts
+    interval: 30s
+    rules:
+      - alert: HighErrorRate
+        expr: rate(fraud_inference_errors_total[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          component: inference
+        annotations:
+          summary: "High error rate in fraud detection service"
+          description: "Error rate is {{ $value | humanizePercentage }} (threshold: 5%)"
+
+      - alert: ModelPerformanceDegradation
+        expr: fraud_model_f1_score < 0.70
+        for: 1h
+        labels:
+          severity: warning
+          component: model
+        annotations:
+          summary: "Model F1-score below threshold"
+          description: "Current F1-score: {{ $value }} (threshold: 0.70)"
+
+      - alert: DataDriftDetected
+        expr: fraud_feature_drift_psi > 0.25
+        for: 10m
+        labels:
+          severity: warning
+          component: data
+        annotations:
+          summary: "Significant data drift detected"
+          description: "PSI value: {{ $value }} (threshold: 0.25)"
+
+      - alert: FraudRateSpike
+        expr: |
+          (
+            rate(fraud_predictions_total{label="fraud"}[10m]) 
+            / 
+            rate(fraud_predictions_total[10m])
+          ) > 0.05
+        for: 15m
+        labels:
+          severity: warning
+          component: predictions
+        annotations:
+          summary: "Unusual spike in fraud predictions"
+          description: "Fraud rate: {{ $value | humanizePercentage }} (normal: ~0.17%)"
+
+      - alert: InferenceLatencyHigh
+        expr: histogram_quantile(0.95, rate(fraud_inference_latency_seconds_bucket[5m])) > 10
+        for: 5m
+        labels:
+          severity: warning
+          component: performance
+        annotations:
+          summary: "High inference latency (p95)"
+          description: "P95 latency: {{ $value }}s (threshold: 10s for batch)"
+
+      - alert: NoDataIngested
+        expr: time() - fraud_last_prediction_timestamp > 172800
+        for: 1h
+        labels:
+          severity: critical
+          component: data
+        annotations:
+          summary: "No predictions in last 48 hours"
+          description: "Last prediction: {{ $value | humanizeDuration }} ago"
+
+      - alert: ContainerRestartLoop
+        expr: rate(container_last_seen{name=~"fraud-.*"}[5m]) > 0.5
+        for: 5m
+        labels:
+          severity: critical
+          component: infrastructure
+        annotations:
+          summary: "Container restart loop detected"
+          description: "Container {{ $labels.name }} restarting frequently"
+
+      - alert: HighMemoryUsage
+        expr: |
+          (
+            container_memory_usage_bytes{name=~"fraud-.*"} 
+            / 
+            container_spec_memory_limit_bytes{name=~"fraud-.*"}
+          ) > 0.90
+        for: 5m
+        labels:
+          severity: warning
+          component: infrastructure
+        annotations:
+          summary: "High memory usage"
+          description: "Memory usage: {{ $value | humanizePercentage }} on {{ $labels.name }}"
+
+      - alert: PrecisionBelowThreshold
+        expr: fraud_model_precision < 0.75
+        for: 1h
+        labels:
+          severity: warning
+          component: model
+        annotations:
+          summary: "Model precision below acceptable threshold"
+          description: "Current precision: {{ $value }} (threshold: 0.75)"
+
+      - alert: RecallBelowThreshold
+        expr: fraud_model_recall < 0.65
+        for: 1h
+        labels:
+          severity: warning
+          component: model
+        annotations:
+          summary: "Model recall below acceptable threshold"
+          description: "Current recall: {{ $value }} (threshold: 0.65)"

@@ -1,0 +1,66 @@
+{
+  "dashboard": {
+    "title": "Fraud Detection - Data Drift",
+    "tags": ["fraud-detection", "data-quality"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Feature Drift (PSI)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "fraud_feature_drift_psi",
+            "legendFormat": "{{feature}}"
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "PSI",
+            "format": "short"
+          }
+        ],
+        "thresholds": [
+          {
+            "value": 0.25,
+            "colorMode": "critical",
+            "fill": true,
+            "line": true,
+            "op": "gt"
+          }
+        ]
+      },
+      {
+        "title": "Validation Errors",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(fraud_validation_errors_total[5m])",
+            "legendFormat": "{{error_type}}"
+          }
+        ]
+      },
+      {
+        "title": "Time Since Last Prediction",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "time() - fraud_last_prediction_timestamp"
+          }
+        ],
+        "options": {
+          "unit": "s"
+        }
+      },
+      {
+        "title": "Batch Size Distribution",
+        "type": "heatmap",
+        "targets": [
+          {
+            "expr": "rate(fraud_batch_size_bucket[5m])",
+            "format": "heatmap"
+          }
+        ]
+      }
+    ]
+  }
+}

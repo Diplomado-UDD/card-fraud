@@ -1,0 +1,87 @@
+{
+  "dashboard": {
+    "title": "Fraud Detection - Model Performance",
+    "tags": ["fraud-detection", "ml"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Predictions per Minute",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(fraud_predictions_total[5m]) * 60",
+            "legendFormat": "{{label}}"
+          }
+        ]
+      },
+      {
+        "title": "Model F1-Score",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "fraud_model_f1_score"
+          }
+        ],
+        "options": {
+          "thresholds": [
+            {"value": 0, "color": "red"},
+            {"value": 0.70, "color": "yellow"},
+            {"value": 0.75, "color": "green"}
+          ]
+        }
+      },
+      {
+        "title": "Precision vs Recall",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "fraud_model_precision",
+            "legendFormat": "Precision"
+          },
+          {
+            "expr": "fraud_model_recall",
+            "legendFormat": "Recall"
+          }
+        ]
+      },
+      {
+        "title": "Fraud Detection Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "fraud_detection_rate",
+            "legendFormat": "Fraud Rate"
+          }
+        ]
+      },
+      {
+        "title": "Inference Latency (p50, p95, p99)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.50, rate(fraud_inference_latency_seconds_bucket[5m]))",
+            "legendFormat": "p50"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(fraud_inference_latency_seconds_bucket[5m]))",
+            "legendFormat": "p95"
+          },
+          {
+            "expr": "histogram_quantile(0.99, rate(fraud_inference_latency_seconds_bucket[5m]))",
+            "legendFormat": "p99"
+          }
+        ]
+      },
+      {
+        "title": "Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(fraud_inference_errors_total[5m])",
+            "legendFormat": "{{error_type}}"
+          }
+        ]
+      }
+    ]
+  }
+}
