@@ -1,0 +1,8 @@
+{
+  "total_transactions": 42722,
+  "fraud_detected": 67,
+  "fraud_rate": 0.001568278638640513,
+  "inference_time_sec": 0.04293,
+  "throughput_per_sec": 995154.9033310039,
+  "timestamp": "2025-11-09T19:28:17.406260"
+}

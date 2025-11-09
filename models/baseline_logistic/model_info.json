@@ -1,0 +1,46 @@
+{
+  "model_type": "logistic",
+  "optimal_threshold": 0.7999999999999996,
+  "hyperparameters": {},
+  "timestamp": "2025-11-09T19:12:07.068732",
+  "metrics": {
+    "train": {
+      "f1_score": 0.0885629671414469,
+      "precision": 0.04653920260856677,
+      "recall": 0.9127906976744186,
+      "roc_auc": 0.9687832588988369,
+      "pr_auc": 0.755591145569697,
+      "true_negatives": 192587,
+      "false_positives": 6433,
+      "false_negatives": 30,
+      "true_positives": 314
+    },
+    "val": {
+      "f1_score": 0.07911001236093942,
+      "precision": 0.04145077720207254,
+      "recall": 0.8648648648648649,
+      "roc_auc": 0.9376246483545941,
+      "pr_auc": 0.6393332022368473,
+      "true_negatives": 41167,
+      "false_positives": 1480,
+      "false_negatives": 10,
+      "true_positives": 64
+    },
+    "test": {
+      "f1_score": 0.7866666666666666,
+      "precision": 0.7763157894736842,
+      "recall": 0.7972972972972973,
+      "roc_auc": 0.9121757872109588,
+      "pr_auc": 0.7402708223575503,
+      "true_negatives": 42631,
+      "false_positives": 17,
+      "false_negatives": 15,
+      "true_positives": 59
+    }
+  },
+  "random_seed": 42,
+  "train_size": 199364,
+  "val_size": 42721,
+  "test_size": 42722,
+  "acceptance_status": "FAILED"
+}

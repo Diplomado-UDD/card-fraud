@@ -1,0 +1,11 @@
+{
+  "train_size": 199364,
+  "val_size": 42721,
+  "test_size": 42722,
+  "train_fraud_count": 344,
+  "val_fraud_count": 74,
+  "test_fraud_count": 74,
+  "train_hash": "49ab47db9745ca8b72a9e98bb1824a0170be64a3ff937bd2aeb60f87396a2e18",
+  "val_hash": "863740278dffe6bd5da05ba27c7b0aeac14a6bacbdebb7b86194b904757e9add",
+  "test_hash": "fef284c598f16bf5a9e35dc8cd7fe6df968b16c2f3c106da6497a1709aa83f06"
+}
